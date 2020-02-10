@@ -18,10 +18,12 @@ class UserSerializer(ModelSerializer):
 
 
 class BillSerializer(ModelSerializer):
+    currency_code = serializers.ReadOnlyField(source='currency.code')
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Bill
-        fields = ('pk', 'owner', 'currency', 'amount')
+        fields = ('pk', 'owner', 'currency_code', 'amount')
 
 
 class TransactionSerializer(ModelSerializer):
