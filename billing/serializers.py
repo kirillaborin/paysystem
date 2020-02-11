@@ -44,3 +44,21 @@ class TransactionSerializer(ModelSerializer):
             'created_at',
             'type'
         )
+
+    def validate(self, data):
+        if data['source_bill'].owner != self.context['request'].user:
+            raise serializers.ValidationError({
+                'source_bill': 'it\'s not your bill'
+            })
+
+        if data['source_bill'] == data['dest_bill']:
+            raise serializers.ValidationError(
+                "You need different source and dest bills"
+            )
+
+        if data['dest_amount'] <= 0:
+            raise serializers.ValidationError({
+                'dest_amount': 'only positive value'
+            })
+
+        return data

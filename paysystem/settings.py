@@ -94,10 +94,9 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': timedelta(hours=24),
-    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 # Password validation
